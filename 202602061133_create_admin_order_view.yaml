@@ -1,0 +1,108 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2025-02-06-create-admin-order-view-table
+      author: t.asadov
+      changes:
+        - createTable:
+            tableName: admin_order_view
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: order_param_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: bigint
+              - column:
+                  name: product
+                  type: varchar(255)
+              - column:
+                  name: product_code
+                  type: varchar(50)
+              - column:
+                  name: status
+                  type: varchar(50)
+              - column:
+                  name: state
+                  type: varchar(50)
+              - column:
+                  name: contract_id
+                  type: bigint
+                  constraints:
+                    nullable: true
+              - column:
+                  name: operation_id
+                  type: bigint
+                  constraints:
+                    nullable: true
+              - column:
+                  name: card_action_type
+                  type: varchar(50)
+              - column:
+                  name: card_amount
+                  type: bigint
+              - column:
+                  name: delivery_amount
+                  type: bigint
+              - column:
+                  name: delivery_type
+                  type: varchar(50)
+              - column:
+                  name: bxm_code
+                  type: varchar(50)
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: payment_status
+                  type: varchar(50)
+              - column:
+                  name: provodka_status
+                  type: varchar(50)
+              - column:
+                  name: phone
+                  type: varchar(20)
+              - column:
+                  name: pnfl
+                  type: varchar(14)
+              - column:
+                  name: fio
+                  type: varchar(255)
+              - column:
+                  name: updated_at
+                  type: timestamp
+              - column:
+                  name: ordered_time
+                  type: timestamp
+                  constraints:
+                    nullable: false
+
+        - addUniqueConstraint:
+            tableName: admin_order_view
+            columnNames: order_param_id
+            constraintName: uk_admin_order_view_order_param_id
+
+        - createIndex:
+            tableName: admin_order_view
+            columns:
+              - column:
+                  name: operation_id
+            indexName: idx_admin_order_view_operation_id
+
+        - createIndex:
+            tableName: admin_order_view
+            columns:
+              - column:
+                  name: status
+            indexName: idx_admin_order_view_status
